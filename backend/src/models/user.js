@@ -68,7 +68,7 @@ userSchema.statics.findCredential=async(email,password)=>{
     return user
 }
 
-//used methods to queryy a particular document
+//used methods to query a particular document
 userSchema.methods.generatetoken= async function(){
     const user=this
     const token=jwt.sign({_id:user._id.toString()},SECRET_KEY)
@@ -77,6 +77,16 @@ userSchema.methods.generatetoken= async function(){
     return token
 }
 
+//will not respond with following deleted attributes 
+userSchema.methods.toJSON = function(){
+    const user=this
+    const userObj=user.toObject()
+
+    delete userObj.password
+    delete userObj.tokens
+
+    return userObj
+}
 
 const User=mongoose.model('User',userSchema)
 
