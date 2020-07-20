@@ -8,10 +8,13 @@ const app = new express.Router()
 
 app.post('/signup',async (req,res)=>{
     const user=new User(req.body)
+    if(!user.email || !user.password || !user.name){
+        return res.status(422).send({error:"please add all the fields"})
+     }
     try{
         await user.save()
         const token=await user.generatetoken()
-        res.send({user,token})
+        res.send({user})
     }catch(error){
         res.status(400)
         res.send(error)

@@ -9,6 +9,7 @@
     "axios": "^0.19.2",
     "babel-cli": "^6.26.0",
     "body-parser": "^1.19.0",
+    "materialize-css": "^1.0.0-rc.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.1.1",
     "react-dom": "^16.13.1",

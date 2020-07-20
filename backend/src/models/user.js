@@ -9,6 +9,7 @@ const {SECRET_KEY}= require('../../../config/keys')
 const userSchema=new mongoose.Schema({
     name:{
         type: String,
+        unique:true,
         required:true,
         trim: true
     },
@@ -27,16 +28,6 @@ const userSchema=new mongoose.Schema({
     password:{
         type:String,
         trim:true,
-        validate(value){
-            if(value.length<=6){
-                throw new Error('Length should be greater than 6')
-            }
-            else{
-             if((value.includes("password"))){
-                 throw new Error('Should not include word password')
-             }
-            }
-        }
     },
     tokens:[{
         token:{
