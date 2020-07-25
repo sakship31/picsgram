@@ -48,7 +48,7 @@ app.get('/allposts',auth1,(req,res)=>{
 //user specific posts
 app.get('/profile/:id',auth1,(req,res)=>{
     Post.find({postedBy:req.params.id})
-    .populate("postedBy","_id name email")
+    .populate("postedBy","_id name email followers following")
     //.populate("comments.postedBy","_id name")
     .sort('-createdAt')
     .then((posts)=>{
@@ -56,6 +56,21 @@ app.get('/profile/:id',auth1,(req,res)=>{
     }).catch(err=>{
         console.log(err)
     })   
+})
+
+app.get('/followingposts',auth1,(req,res)=>{
+
+    // if postedBy in following
+    Post.find({postedBy:{$in:req.user.following}})
+    .populate("postedBy","_id name")
+    .populate("comments.postedBy","_id name")
+    .sort('-createdAt')
+    .then(posts=>{
+        res.send({posts})
+    })
+    .catch(err=>{
+        console.log(err)
+    })
 })
 
 app.put('/like',auth1,(req,res)=>{
@@ -103,7 +118,7 @@ app.put('/comment',auth1,(req,res)=>{
         new:true
     })
     .populate("comments.postedBy","_id name")
-    // .populate("postedBy","_id name")
+    .populate("postedBy","_id name")
     .exec((err,result)=>{
         if(err){
             return res.status(422).send(err)

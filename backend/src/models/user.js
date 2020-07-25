@@ -2,6 +2,7 @@ const mongoose=require('mongoose')
 const validator=require('validator')
 const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken')
+const {ObjectId} = mongoose.Schema.Types
 const {SECRET_KEY}= require('../../../config/keys')
 // const moment = require('moment-timezone');
 // const dateIndia = moment.tz(Date.now(), "Asia/Calcutta");
@@ -35,6 +36,8 @@ const userSchema=new mongoose.Schema({
             required:true
         }
     }],
+    followers:[{type:ObjectId,ref:"User"}],
+    following:[{type:ObjectId,ref:"User"}],
 })
 
 userSchema.pre('save',async function(next){
