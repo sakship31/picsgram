@@ -36,6 +36,7 @@
   }
 .item{
     width: 30%;
+    height: 150px;
     margin-bottom: 8px;
 }  
 .home-card{
@@ -48,6 +49,9 @@
   width: 100%;
 }
 
+.li{
+  cursor: pointer;
+}
 
 #toast-container{
   top:30px !important;

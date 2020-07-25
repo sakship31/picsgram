@@ -1,8 +1,10 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import {Link,useHistory} from 'react-router-dom'
+import {UserContext} from '../App'
 import axios from 'axios';
 import M from 'materialize-css'
 const Login=()=>{
+  const {state,dispatch} = useContext(UserContext)
     const [password,setPassword] = useState('');
     const [email,setEmail] = useState('');
     const history = useHistory()
@@ -23,6 +25,7 @@ const Login=()=>{
           console.log(data.data.user)
                localStorage.setItem("jwt",data.data.token)
                localStorage.setItem("user",JSON.stringify(data.data.user))
+               dispatch({type:"USER",payload:data.data.user})
                M.toast({html:"Logged in successfully",classes:"#43a047 green darken-1"})
                history.push('/explore')
            
@@ -32,7 +35,7 @@ const Login=()=>{
         })
     }
 
-    return (
+    return (<div>
         <div className="mycard">
         <div className="card auth-card input-field">
             <h4 >Login</h4>
@@ -50,6 +53,7 @@ const Login=()=>{
               <h6>
               Don't have an account ?<Link to="/signup">Signup</Link>
             </h6>
+        </div>
         </div>
         </div>
     )

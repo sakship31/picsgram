@@ -36,7 +36,7 @@ app.post('/createpost',auth1,async (req,res)=>{
 app.get('/allposts',auth1,(req,res)=>{
     Post.find()
     .populate("postedBy","_id name")
-    // .populate("comments.postedBy","_id name")
+    .populate("comments.postedBy","_id name")
     .sort('-createdAt')
     .then((posts)=>{
         res.send({posts})
@@ -45,11 +45,11 @@ app.get('/allposts',auth1,(req,res)=>{
     })
     
 })
-
-app.get('/myposts',auth1,(req,res)=>{
-    Post.find({postedBy:req.user._id})
-    .populate("postedBy","_id name")
-    // .populate("comments.postedBy","_id name")
+//user specific posts
+app.get('/profile/:id',auth1,(req,res)=>{
+    Post.find({postedBy:req.params.id})
+    .populate("postedBy","_id name email")
+    //.populate("comments.postedBy","_id name")
     .sort('-createdAt')
     .then((posts)=>{
         res.send({posts})
@@ -58,6 +58,74 @@ app.get('/myposts',auth1,(req,res)=>{
     })   
 })
 
-// Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjBjZjEwMjM0OGVjNDNkMTQ0ZmIxMjAiLCJpYXQiOjE1OTQ2ODM2NTB9.aGax498enIlziqfFuHcP1RIz9IHGOR2615REAgh8v50
+app.put('/like',auth1,(req,res)=>{
+    Post.findByIdAndUpdate(req.body.postId,{
+        $push:{likes:req.user._id}
+    },{
+        new:true
+    })
+    .populate("comments.postedBy","_id name")
+    .populate("postedBy","_id name")
+    .exec((err,result)=>{
+        if(err){
+            return res.status(422).send(err)
+        }else{
+            res.send(result)
+        }
+    })
+})
+
+app.put('/unlike',auth1,(req,res)=>{
+    Post.findByIdAndUpdate(req.body.postId,{
+        $pull:{likes:req.user._id}
+    },{
+        new:true
+    })
+    .populate("comments.postedBy","_id name")
+    .populate("postedBy","_id name")
+    .exec((err,result)=>{
+        if(err){
+            return res.status(422).send(err)
+        }else{
+            res.send(result)
+        }
+    })
+})
+
+app.put('/comment',auth1,(req,res)=>{
+    const comment = {
+        text:req.body.text,
+        postedBy:req.user._id
+    }
+    Post.findByIdAndUpdate(req.body.postId,{
+        $push:{comments:comment}
+    },{
+        new:true
+    })
+    .populate("comments.postedBy","_id name")
+    // .populate("postedBy","_id name")
+    .exec((err,result)=>{
+        if(err){
+            return res.status(422).send(err)
+        }else{
+            res.send(result)
+        }
+    })
+})
+
+
+app.delete('/post/:id',auth1,async (req,res)=>{
+    try{
+        //const user=await Task1.findByIdAndDelete(req.params.id)
+        const post=await Post.findOneAndDelete({_id:req.params.id,postedBy:req.user._id})
+        if(!post){
+            return res.status(404).send()
+        }
+        res.send(post)
+    }catch{
+        return res.status(500).send()
+    }
+})
+
 
 module.exports=app 
