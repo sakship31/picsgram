@@ -11,7 +11,7 @@ const Navbar=()=>{
              <li key="2"><Link to="/explore" style={{color:"black"}}>Explore</Link></li>,
              <li key="3"><Link to="/profile/my" style={{color:"black"}}>Profile</Link></li>,
              <li key="4"><Link to="/createPost" style={{color:"black"}}>Create Post</Link></li>,
-             <li key="5"><Link to="/myfollowingpost" style={{color:"black"}}>My following Posts</Link></li>,
+             <li key="5"><Link to="/followingposts" style={{color:"black"}}>My following Posts</Link></li>,
              <li  key="6">
               <button style={{
                             margin:"10px",

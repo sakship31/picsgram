@@ -4,7 +4,13 @@
 .brand-logo{
     font-family: 'Dancing Script', cursive;
   }
-  
+
+
+#username{
+  padding-top:12px;
+  padding-left:3px;
+  float:left;
+}
 
 .mycard{
     margin-top: 30px;
@@ -15,6 +21,14 @@
     max-width: 400px;
     margin: 10px auto;
   }
+.card-content{
+  padding-top:10px !important ;
+  padding-left: 15px !important;
+}
+.input-field {
+  position: relative;
+  margin-top: 0rem !important;
+  margin-bottom: 1rem;}
 
   .input-field input[type=text]:focus {
     border-bottom: 1px solid rgb(0, 40, 116)  !important;

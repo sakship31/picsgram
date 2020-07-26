@@ -51,5 +51,16 @@ app.put('/unfollow',auth1,(req,res)=>{
 })
 
 
+app.put('/updatepic',auth1,async (req,res)=>{
+    User.findByIdAndUpdate(req.user._id,{$set:{pic:req.body.pic}},{new:true},
+        (err,result)=>{
+         if(err){
+             return res.status(422).send({error:"pic cannot be updated"})
+         }
+         res.send(result)
+    })
+
+})
+
 
 module.exports=app

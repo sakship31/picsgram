@@ -2,11 +2,12 @@ import React from 'react'
 import {useState,useEffect,useContext} from 'react'
 import axios from 'axios';
 import {UserContext} from '../App'
-import { useParams } from 'react-router-dom';
+import { useParams, Link ,useHistory} from 'react-router-dom';
 
 
 const Profile=()=>{
     const {state,dispatch} = useContext(UserContext)
+    const history=useHistory()
     const [data,setData]=useState([])
     const[userDetail,setUserDetail]=useState([])
     const user=JSON.parse(localStorage.getItem("user"));
@@ -22,8 +23,16 @@ const Profile=()=>{
           }
         }).then(res=>res)
         .then(result=>{
-            setData(result.data.posts)
-            setUserDetail(result.data.posts[0].postedBy)
+            if(result.data.posts.length)
+            {
+              setData(result.data.posts)
+              setUserDetail(result.data.posts[0].postedBy)
+            }
+            else{
+
+                setUserDetail(result.data.user[0])
+
+            }
         })
     }
     else{
@@ -36,8 +45,19 @@ const Profile=()=>{
           }
         }).then(res=>res)
         .then(result=>{
-            setData(result.data.posts)
-            setUserDetail(result.data.posts[0].postedBy)
+            // setData(result.data.posts)
+            // console.log(result.data.user[0].pic)
+            if(result.data.posts.length)
+            {
+              setData(result.data.posts)
+              setUserDetail(result.data.posts[0].postedBy)
+            }
+            else{
+
+                setUserDetail(result.data.user[0])
+
+            }
+            
         })
     }
     },[userid,userDetail])
@@ -75,6 +95,10 @@ const Profile=()=>{
         })
     }
 
+    const updatePic = ()=>{
+        history.push('/updatePic')
+  }
+
     return (
         <div style={{maxWidth:"550px",margin:"0px auto"}}>
         <div style={{
@@ -90,21 +114,19 @@ const Profile=()=>{
         }}>
             <div>
                 <img style={{width:"120px",height:"120px",borderRadius:"60px"}}
-                src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
+                src={userDetail.pic}
                 />
-              
             </div>
             <div>
     {/* <h4>{(JSON.parse(localStorage.getItem("user"))).name}</h4> */}
     <h4>{userDetail.name}</h4>
-    
                 <h5>{userDetail.email}</h5>
                 <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
                     <h6>{(data).length} posts</h6>
                     <h6>{userDetail.followers?userDetail.followers.length:console.log('')} followers</h6>
                     <h6>{userDetail.followers?userDetail.following.length:console.log('')} following</h6>
                 </div>
-                {userid !=='my'?(userDetail.followers?(userDetail.followers.includes(state._id)?   
+                {userid !=='my' && userid!==user._id?(userDetail.followers?(userDetail.followers.includes(state._id)?   
                 <button style={{
                             margin:"10px",
                             color:"black",
@@ -130,9 +152,9 @@ const Profile=()=>{
                                 width:"300px",
                                 backgroundColor:"#e6e9ed",
                             }} className="btn "
-                             onClick={()=>followUser()}
+                             onClick={()=>updatePic()}
                              >
-                                 Update Picture
+                                 Update Profile Picture
                              </button>}
                                    
                           

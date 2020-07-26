@@ -36,6 +36,9 @@ const userSchema=new mongoose.Schema({
             required:true
         }
     }],
+    pic:{
+        type:String,
+        default:"https://drgsearch.com/wp-content/uploads/2020/01/no-photo.png" },
     followers:[{type:ObjectId,ref:"User"}],
     following:[{type:ObjectId,ref:"User"}],
 })
@@ -85,3 +88,10 @@ userSchema.methods.toJSON = function(){
 const User=mongoose.model('User',userSchema)
 
 module.exports=User
+
+
+
+
+
+
+

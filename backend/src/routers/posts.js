@@ -1,5 +1,6 @@
 const express=require('express')
 const Post=require('../models/post')
+const User=require('../models/user')
 const auth1=require('../middleware/auth1')
 // const multer=require('multer')
 // const sharp=require('sharp')
@@ -35,7 +36,7 @@ app.post('/createpost',auth1,async (req,res)=>{
 
 app.get('/allposts',auth1,(req,res)=>{
     Post.find()
-    .populate("postedBy","_id name")
+    .populate("postedBy","_id name pic")
     .populate("comments.postedBy","_id name")
     .sort('-createdAt')
     .then((posts)=>{
@@ -48,11 +49,17 @@ app.get('/allposts',auth1,(req,res)=>{
 //user specific posts
 app.get('/profile/:id',auth1,(req,res)=>{
     Post.find({postedBy:req.params.id})
-    .populate("postedBy","_id name email followers following")
+    .populate("postedBy","_id name email pic followers following")
     //.populate("comments.postedBy","_id name")
     .sort('-createdAt')
-    .then((posts)=>{
-        res.send({posts})
+    .then((posts)=>{       
+        User.find({_id:req.params.id})
+        .populate("_id","_id name email pic followers following")
+        .then((user)=>{
+            return res.send({posts,user})
+        }).catch(err=>{
+            console.log(err)
+        })
     }).catch(err=>{
         console.log(err)
     })   

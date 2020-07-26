@@ -2,11 +2,11 @@ import React,{useState,useEffect,useContext} from 'react'
 import {Link,useHistory} from 'react-router-dom'
 import axios from 'axios';
 import {UserContext} from '../App'
-const Explore=()=>{
+const Followingposts=()=>{
     const [data,setData]=useState([])
     const {state,dispatch} = useContext(UserContext)
     useEffect(()=>{
-        axios.get('http://localhost:5000/allposts',
+        axios.get('http://localhost:5000/followingposts',
         // body:JSON.stringify(
         {
           headers: {
@@ -119,17 +119,14 @@ data.map(item =>{
     return(     
     <div className="card home-card">
      <div className="card-image">
-       <div >
-         <img style={{ padding:"7px", width:"50px",height:"50px",borderRadius:"30px",float:"left"}}
-                src={item.postedBy.pic}
-                /></div><h5 style={{paddingLeft:"3px",paddingTop:"12px",fontSize:"20px"}}><Link to={item.postedBy._id !== state._id?"/profile/"+item.postedBy._id :"/profile/my"} >{item.postedBy.name}</Link>
-          
+         </div><h6 style={{padding:"5px"}}><Link to={item.postedBy._id !== state._id?"/profile/"+item.postedBy._id :"/profile/my"  }>{item.postedBy.name}</Link>
+
          {item.postedBy._id == state._id 
                             && <i className="material-icons" style={{
-                                float:"right",cursor: "pointer",paddingTop:"9px",paddingRight:"5px"
+                                float:"right",cursor: "pointer"
                             }} 
                             onClick={()=>deletePost(item._id)}
-                            >delete</i>}</h5></div>
+                            >delete</i>}</h6>
 
          <div className="card-image">
              <img src={item.pic}/>
@@ -145,7 +142,7 @@ data.map(item =>{
          <br/>{item.likes.length} likes<br/>
             <h6 >{item.caption}</h6>   
 
-            <h6 style={{fontWeight:"500",color:"#81858a"}}> {item.comments.length} Comments</h6>   
+            <h6 style={{fontWeight:"500"}}> {item.comments.length} Comments</h6>   
             {
                                     item.comments.map(record=>{
                                         return(
@@ -174,4 +171,4 @@ data.map(item =>{
 
 
 
-export default Explore
+export default Followingposts

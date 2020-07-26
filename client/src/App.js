@@ -8,6 +8,8 @@ import Profile from './components/profile'
 import Explore from './components/explore'
 import CreatePost from './components/createPost'
 import {reducer,initialState}  from './reducers/userReducer'
+import Followingposts from './components/followingposts';
+import UpdatePic from './components/updatePic';
 
 export const UserContext = createContext()
 
@@ -33,11 +35,17 @@ const Routing = ()=>{
       <Route path="/profile/:userid">
         <Profile />
       </Route>
+      <Route path="/followingposts">
+        <Followingposts />
+      </Route>
       <Route path="/explore">
         <Explore />
       </Route>
       <Route path="/createPost">
         <CreatePost />
+        </Route>
+        <Route path="/updatePic">
+        <UpdatePic />
       </Route>
       </div>
   )
