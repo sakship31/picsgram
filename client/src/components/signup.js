@@ -27,7 +27,7 @@ const Signup=()=>{
                history.push('/login')
            
         }).catch(err=>{
-          M.toast({html: "Authentication failed,please check your email address!",classes:"#c62828 red darken-3"})
+          M.toast({html: "Authentication failed",classes:"#c62828 red darken-3"})
             console.log(err)
         })
  
