@@ -12,6 +12,7 @@ import Followingposts from './components/followingposts';
 import Single from './components/singlepost';
 import UpdatePic from './components/updatePic';
 import Followers from './components/followers';
+import Following from './components/following';
 
 export const UserContext = createContext()
 
@@ -44,7 +45,7 @@ const Routing = ()=>{
         <Followers />
       </Route>
       <Route path="/following/:id">
-        <Followers />
+        <Following />
       </Route>
       <Route path="/home">
         <Followingposts />

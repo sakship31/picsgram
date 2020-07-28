@@ -77,7 +77,7 @@ app.post('/search',(req,res)=>{
 
 app.get('/following/:id',(req,res)=>{
     User.find({_id:req.params.id})
-    .populate("following","_id pic name")
+    .populate("following","_id pic name following followers")
     .then((users)=>{       
                  return res.send({users})
          }).catch(err=>{
@@ -88,7 +88,7 @@ app.get('/following/:id',(req,res)=>{
 
 app.get('/followers/:id',(req,res)=>{
     User.find({_id:req.params.id})
-    .populate("followers","_id pic name")
+    .populate("followers","_id pic name followers")
     .then((users)=>{   
             return res.send({users})
     }).catch(err=>{
@@ -98,5 +98,49 @@ app.get('/followers/:id',(req,res)=>{
 })
 
 
+// app.delete('/users/me',auth1,async (req,res)=>{
+//     try{
+//     //     const _id=req.user._id
+//     i=0
+//     console.log('heeee')
+//     console.log(req.user.following)
+//         User.find({_id:{$in:req.user.following}})
+//         .then(following=>{  
+//             while(i<following.length){
+//             console.log(following[i])
+//             console.log('hey',following[i]._id)
+//             console.log('hey1',req.user._id)
+//             User.findByIdAndUpdate(following[i]._id,{
+//                 $pull:{followers:req.user._id}
+//             },{
+//                 new:true
+//             },(err,result)=>{
+//                 if(err){
+//                     return res.status(422).send(err)
+//                 }
+//             //   User.findByIdAndUpdate(req.user._id,{
+//             //       $pull:{following:following._id}
+                  
+//             //   },{new:true},(err,result)=>{
+//             //     if(err){
+//             //         return res.status(422).send(err)
+//             //     }
+//             //     res.send(req.user)
 
+//             // })
+//               console.log(following[i])  
+//             res.status(200).send(req.user)
+//             }
+//             )
+//         // await req.user.remove()
+//         // res.send(following[i])
+//   i=i+1 }}).catch(e=>{
+//         return res.status(500).send()
+//     })
+// }catch(e){
+//     console.log('h')
+//     console.log(e)
+// }})
+
+        
 module.exports=app

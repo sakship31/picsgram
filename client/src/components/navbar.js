@@ -84,14 +84,15 @@ const Navbar=()=>{
             />
              <ul className="collection">
                {userDetails.map(item=>{
-                 return <Link to={item._id !== state._id ? "/profile/"+item._id:'/profile/my'} onClick={()=>{
+                 return (<Link to={item._id !== state._id ? "/profile/"+item._id:'/profile/my'} onClick={()=>{
                    M.Modal.getInstance(searchModal.current).close()
+                   setUserDetails([])
                    setSearch('')
                  }}><li className="collection-item">
                  <img className="follower-pic"
                         src={item.pic}
-                        /><div className="follower-name">{item.name}</div></li></Link> 
-               })}
+                        /><div className="follower-name">{item.name}</div></li></Link>) 
+                 } )}
                
               </ul>
           </div>

@@ -1,6 +1,6 @@
 const express=require('express')
 const User=require('../models/user')
-// const auth=require('../middleware/auth')
+const auth1=require('../middleware/auth1')
 // const multer=require('multer')
 // const sharp=require('sharp')
 
@@ -32,6 +32,7 @@ app.post('/login',async(req,res)=>{
         res.status(404).send()
     }
 })
+
 
 
 

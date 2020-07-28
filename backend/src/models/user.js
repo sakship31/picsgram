@@ -4,6 +4,7 @@ const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken')
 const {ObjectId} = mongoose.Schema.Types
 const {SECRET_KEY}= require('../../../config/keys')
+const Post =require('./post')
 // const moment = require('moment-timezone');
 // const dateIndia = moment.tz(Date.now(), "Asia/Calcutta");
 
@@ -84,6 +85,11 @@ userSchema.methods.toJSON = function(){
 
     return userObj
 }
+userSchema.pre('remove',async function(next){
+    const user=this
+    await Post.deleteMany({postedBy:user._id})
+    next()
+})
 
 const User=mongoose.model('User',userSchema)
 

@@ -151,7 +151,7 @@ const Profile=()=>{
                 <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
                     <h6>{(data).length} posts</h6>
                     <Link to={userDetail._id._id===user._id? "/followers/"+user._id:"/followers/"+userDetail._id._id}><h6 className="link">{userDetail.followers.length} followers</h6></Link>
-                    <Link to={userDetail._id._id===user._id? "/followers/"+user._id:"/followers/"+userDetail._id._id}><h6 className="link">{userDetail.following.length} following</h6></Link>
+                    <Link to={userDetail._id._id===user._id? "/following/"+user._id:"/following/"+userDetail._id._id}><h6 className="link">{userDetail.following.length} following</h6></Link>
                 </div>
                 {userid !=='my' && userid!==user._id?(userDetail.followers.includes(state._id)?   
                 <button style={{
