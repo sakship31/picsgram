@@ -95,6 +95,33 @@ const Profile=()=>{
         })
     }
 
+    const followers = (uid)=>{
+      axios.put('http://localhost:5000/followers/'+uid,
+      // body:JSON.stringify(
+    {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization":"Bearer "+localStorage.getItem("jwt")
+        }
+      }).then(res=>res)
+      .then(data=>{
+              console.log(data)
+      })
+  }
+  const following = (uid)=>{
+    axios.put('http://localhost:5000/following/'+uid,
+    // body:JSON.stringify(
+  {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization":"Bearer "+localStorage.getItem("jwt")
+      }
+    }).then(res=>res)
+    .then(data=>{
+            console.log(data)
+    })
+}
+
     const updatePic = ()=>{
         history.push('/updatePic')
   }
@@ -119,13 +146,14 @@ const Profile=()=>{
                 />
             </div>
             <div>
+            
     <h4>{userDetail.name}</h4>
                 <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
                     <h6>{(data).length} posts</h6>
-                    <h6>{userDetail.followers?userDetail.followers.length:"loading"} followers</h6>
-                    <h6>{userDetail.followers?userDetail.following.length:"loading"} following</h6>
+                    <Link to={userDetail._id._id===user._id? "/followers/"+user._id:"/followers/"+userDetail._id._id}><h6 className="link">{userDetail.followers.length} followers</h6></Link>
+                    <Link to={userDetail._id._id===user._id? "/followers/"+user._id:"/followers/"+userDetail._id._id}><h6 className="link">{userDetail.following.length} following</h6></Link>
                 </div>
-                {userid !=='my' && userid!==user._id?(userDetail.followers?(userDetail.followers.includes(state._id)?   
+                {userid !=='my' && userid!==user._id?(userDetail.followers.includes(state._id)?   
                 <button style={{
                             margin:"10px",
                             color:"black",
@@ -144,7 +172,7 @@ const Profile=()=>{
                              onClick={()=>followUser()}
                              >
                                  Follow
-                             </button>):"loading"): 
+                             </button>): 
                              <button style={{
                                 margin:"10px",
                                 color:"black",

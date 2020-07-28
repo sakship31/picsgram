@@ -11,6 +11,7 @@ import {reducer,initialState}  from './reducers/userReducer'
 import Followingposts from './components/followingposts';
 import Single from './components/singlepost';
 import UpdatePic from './components/updatePic';
+import Followers from './components/followers';
 
 export const UserContext = createContext()
 
@@ -38,6 +39,12 @@ const Routing = ()=>{
       </Route>
       <Route path="/single/:id">
         <Single />
+      </Route>
+      <Route path="/followers/:id">
+        <Followers />
+      </Route>
+      <Route path="/following/:id">
+        <Followers />
       </Route>
       <Route path="/home">
         <Followingposts />

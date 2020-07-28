@@ -75,5 +75,28 @@ app.post('/search',(req,res)=>{
 
 })
 
+app.get('/following/:id',(req,res)=>{
+    User.find({_id:req.params.id})
+    .populate("following","_id pic name")
+    .then((users)=>{       
+                 return res.send({users})
+         }).catch(err=>{
+             console.log(err)
+         })
+    
+})
+
+app.get('/followers/:id',(req,res)=>{
+    User.find({_id:req.params.id})
+    .populate("followers","_id pic name")
+    .then((users)=>{   
+            return res.send({users})
+    }).catch(err=>{
+        console.log(err)
+    })
+
+})
+
+
 
 module.exports=app

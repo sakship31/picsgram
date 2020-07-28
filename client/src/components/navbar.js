@@ -88,9 +88,9 @@ const Navbar=()=>{
                    M.Modal.getInstance(searchModal.current).close()
                    setSearch('')
                  }}><li className="collection-item">
-                 <img style={{  width:"40px",height:"40px",borderRadius:"20px",float:"left"}}
+                 <img className="follower-pic"
                         src={item.pic}
-                        /><div  style={{color:"black",paddingLeft:"20px",paddingTop:"5px",float:"left"}}>{item.name}</div></li></Link> 
+                        /><div className="follower-name">{item.name}</div></li></Link> 
                })}
                
               </ul>

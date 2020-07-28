@@ -88,3 +88,29 @@
   padding-bottom: 20px;
   border-bottom: 1px solid;
 }
+.collection-item{
+  width: 100%;
+}
+
+.followers-box{
+  border-bottom: 0.5px solid;
+  padding: 10px;
+  margin-bottom: 5px;
+  padding-bottom: 20px;
+}
+
+.follower-pic{
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  float: left;
+}
+
+.follower-name{
+  padding-left: 20px;
+  padding-top: 5px;
+  float: left;
+}
+
+
+
