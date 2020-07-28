@@ -1,17 +1,43 @@
-import React,{useContext} from 'react'
+import React,{useContext,useRef,useEffect,useState} from 'react'
 import {Link,useHistory} from 'react-router-dom'
 import {UserContext} from '../App'
+import M from 'materialize-css'
+import Axios from 'axios'
 const Navbar=()=>{
+  const  searchModal = useRef(null)
+    const [search,setSearch] = useState('')
+    const [userDetails,setUserDetails] = useState([])
     const history = useHistory()
     const {state,dispatch} = useContext(UserContext)
+    useEffect(()=>{
+      M.Modal.init(searchModal.current)
+  },[])
+  
+  const fetchUsers = (query)=>{
+    setSearch(query)
+    Axios.post('http://localhost:5000/search',
+    {
+      query
+    },{   
+      headers:{
+        "Content-Type":"application/json"
+      },
+   
+    }).then(res=>res)
+    .then(results=>{
+      console.log(results)
+      setUserDetails(results.data.user)
+      
+    })
+ }
     const renderList = ()=>{
         if(localStorage.getItem("user")){
             return [
-             <li key="1"><i  data-target="modal1" className="large material-icons modal-trigger" style={{color:"black"}}>search</i></li>,
+             <li key="1"><i  data-target="modal1" className="large material-icons modal-trigger li" style={{color:"black"}}>search</i></li>,
+             <li key="5"><Link to="/followingposts" style={{color:"black"}}>Home</Link></li>,
              <li key="2"><Link to="/explore" style={{color:"black"}}>Explore</Link></li>,
-             <li key="3"><Link to="/profile/my" style={{color:"black"}}>Profile</Link></li>,
              <li key="4"><Link to="/createPost" style={{color:"black"}}>Create Post</Link></li>,
-             <li key="5"><Link to="/followingposts" style={{color:"black"}}>My following Posts</Link></li>,
+             <li key="3"><Link to="/profile/my" style={{color:"black"}}>Profile</Link></li>,           
              <li  key="6">
               <button style={{
                             margin:"10px",
@@ -47,7 +73,33 @@ const Navbar=()=>{
              {renderList()}
                 
             </ul>
-            </div>    
+            </div> 
+            <div id="modal1" className="modal" ref={searchModal} style={{color:"black"}}>
+          <div className="modal-content input-field">
+          <input
+            type="text"
+            placeholder="search users"
+            value={search}
+            onChange={(e)=>fetchUsers(e.target.value)}
+            />
+             <ul className="collection">
+               {userDetails.map(item=>{
+                 return <Link to={item._id !== state._id ? "/profile/"+item._id:'/profile/my'} onClick={()=>{
+                   M.Modal.getInstance(searchModal.current).close()
+                   setSearch('')
+                 }}><li className="collection-item">
+                 <img style={{  width:"40px",height:"40px",borderRadius:"20px",float:"left"}}
+                        src={item.pic}
+                        /><div  style={{color:"black",paddingLeft:"20px",paddingTop:"5px",float:"left"}}>{item.name}</div></li></Link> 
+               })}
+               
+              </ul>
+          </div>
+          <div className="modal-footer">
+            <button className="modal-close waves-effect waves-green btn-flat" onClick={()=>setSearch('')}>close</button>
+          </div>
+        </div>
+   
         </nav>
     )
 }

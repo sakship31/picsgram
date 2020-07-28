@@ -50,9 +50,14 @@
   }
 .item{
     width: 30%;
-    height: 150px;
-    margin-bottom: 8px;
-}  
+} 
+
+.itemx{
+  width: 100%;
+  height: 150px;
+  margin-bottom: 8px;
+} 
+
 .home-card{
   max-width: 500px;
   height: max-content;
@@ -71,4 +76,9 @@
   top:30px !important;
   right: 20px !important;
   left: auto !important;
+}
+
+.update{
+  margin-top: 30px !important;
+  margin-left: 400px !important;
 }

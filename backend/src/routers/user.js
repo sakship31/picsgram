@@ -63,4 +63,17 @@ app.put('/updatepic',auth1,async (req,res)=>{
 })
 
 
+app.post('/search',(req,res)=>{
+    let userPattern = new RegExp("^"+req.body.query)
+    User.find({name:{$regex:userPattern}})
+    .select("_id name pic")
+    .then(user=>{
+        res.send({user})
+    }).catch(err=>{
+        console.log(err)
+    })
+
+})
+
+
 module.exports=app

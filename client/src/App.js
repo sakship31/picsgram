@@ -9,6 +9,7 @@ import Explore from './components/explore'
 import CreatePost from './components/createPost'
 import {reducer,initialState}  from './reducers/userReducer'
 import Followingposts from './components/followingposts';
+import Single from './components/singlepost';
 import UpdatePic from './components/updatePic';
 
 export const UserContext = createContext()
@@ -34,6 +35,9 @@ const Routing = ()=>{
       </Route>
       <Route path="/profile/:userid">
         <Profile />
+      </Route>
+      <Route path="/single/:id">
+        <Single />
       </Route>
       <Route path="/followingposts">
         <Followingposts />

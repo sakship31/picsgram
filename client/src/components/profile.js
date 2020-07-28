@@ -26,10 +26,10 @@ const Profile=()=>{
             if(result.data.posts.length)
             {
               setData(result.data.posts)
-              setUserDetail(result.data.posts[0].postedBy)
+              setUserDetail(result.data.user[0])
             }
             else{
-
+                setData([])
                 setUserDetail(result.data.user[0])
 
             }
@@ -50,10 +50,10 @@ const Profile=()=>{
             if(result.data.posts.length)
             {
               setData(result.data.posts)
-              setUserDetail(result.data.posts[0].postedBy)
+              setUserDetail(result.data.user[0])
             }
             else{
-
+                setData([])
                 setUserDetail(result.data.user[0])
 
             }
@@ -118,13 +118,12 @@ const Profile=()=>{
                 />
             </div>
             <div>
-    {/* <h4>{(JSON.parse(localStorage.getItem("user"))).name}</h4> */}
     <h4>{userDetail.name}</h4>
-                <h5>{userDetail.email}</h5>
+                {/* <h5>{userDetail.email}</h5> */}
                 <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
                     <h6>{(data).length} posts</h6>
-                    <h6>{userDetail.followers?userDetail.followers.length:console.log('')} followers</h6>
-                    <h6>{userDetail.followers?userDetail.following.length:console.log('')} following</h6>
+                    <h6>{userDetail.followers?userDetail.followers.length:"loading"} followers</h6>
+                    <h6>{userDetail.followers?userDetail.following.length:"loading"} following</h6>
                 </div>
                 {userid !=='my' && userid!==user._id?(userDetail.followers?(userDetail.followers.includes(state._id)?   
                 <button style={{
@@ -145,7 +144,7 @@ const Profile=()=>{
                              onClick={()=>followUser()}
                              >
                                  Follow
-                             </button>):console.log('')): 
+                             </button>):"loading"): 
                              <button style={{
                                 margin:"10px",
                                 color:"black",
@@ -164,8 +163,7 @@ const Profile=()=>{
          </div>      
         <div className="gallery">{
         data.map(item =>{return(
-           
-                     <img className="item" src={item.pic} />  
+                    <Link to={"/single/"+item._id } className="item"><img key={item._id} className="itemx" src={item.pic} alt={item.title}/></Link>
             
         )})
 }

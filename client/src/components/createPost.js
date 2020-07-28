@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
-import {Link,useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import M from 'materialize-css'
 const {URL,UPLOAD_PRESET,CLOUD_NAME}=require('../config') 
 const CreatePost=()=>{
@@ -54,9 +54,8 @@ const CreatePost=()=>{
      
     }
     return (
-    <div className="card input-field"
+    <div className="card input-field update"
 style={{
-    margin:"30px auto",
     maxWidth:"500px",
     padding:"20px",
     textAlign:"center"

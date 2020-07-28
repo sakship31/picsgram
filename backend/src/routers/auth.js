@@ -3,8 +3,9 @@ const User=require('../models/user')
 // const auth=require('../middleware/auth')
 // const multer=require('multer')
 // const sharp=require('sharp')
-// const {welcomeMail,cancelMail}=require('../emails/account')
+
 const app = new express.Router()
+
 
 app.post('/signup',async (req,res)=>{
     const user=new User(req.body)
@@ -13,8 +14,9 @@ app.post('/signup',async (req,res)=>{
      }
     try{
         await user.save()
-        const token=await user.generatetoken()
-        res.send({user})
+        // const token=await user.generatetoken()
+           res.send({user})
+        
     }catch(error){
         res.status(400)
         res.send(error)

@@ -2,6 +2,7 @@ const express=require('express')
 const Post=require('../models/post')
 const User=require('../models/user')
 const auth1=require('../middleware/auth1')
+const { json } = require('body-parser')
 // const multer=require('multer')
 // const sharp=require('sharp')
 // const {welcomeMail,cancelMail}=require('../emails/account')
@@ -34,16 +35,16 @@ app.post('/createpost',auth1,async (req,res)=>{
 
 })
 
-app.get('/allposts',auth1,(req,res)=>{
-    Post.find()
-    .populate("postedBy","_id name pic")
-    .populate("comments.postedBy","_id name")
-    .sort('-createdAt')
-    .then((posts)=>{
-        res.send({posts})
-    }).catch(err=>{
-        console.log(err)
-    })
+app.get('/allposts',auth1,(req,res)=>{   
+        Post.find({$and:[{postedBy:{$nin:req.user.following}},{postedBy:{$nin:req.user._id}}]})
+        .populate("postedBy","_id name pic")
+        .populate("comments.postedBy","_id name pic")
+        .sort('-createdAt')
+        .then((posts)=>{
+            res.send({posts})  
+        }).catch(err=>{
+            console.log(err)
+        })
     
 })
 //user specific posts
@@ -69,13 +70,25 @@ app.get('/followingposts',auth1,(req,res)=>{
 
     // if postedBy in following
     Post.find({postedBy:{$in:req.user.following}})
-    .populate("postedBy","_id name")
-    .populate("comments.postedBy","_id name")
+    .populate("postedBy","_id name pic")
+    .populate("comments.postedBy","_id name pic")
     .sort('-createdAt')
     .then(posts=>{
         res.send({posts})
     })
     .catch(err=>{
+        console.log(err)
+    })
+})
+
+app.get('/single/:id',auth1,(req,res)=>{
+    Post.findById(_id=req.params.id)
+    .populate("postedBy","_id name pic")
+    .populate("comments.postedBy","_id name pic")
+    .sort('-createdAt')
+    .then((posts)=>{
+        res.send({posts})  
+    }).catch(err=>{
         console.log(err)
     })
 })
@@ -86,8 +99,8 @@ app.put('/like',auth1,(req,res)=>{
     },{
         new:true
     })
-    .populate("comments.postedBy","_id name")
-    .populate("postedBy","_id name")
+    .populate("comments.postedBy","_id name pic")
+    .populate("postedBy","_id name pic")
     .exec((err,result)=>{
         if(err){
             return res.status(422).send(err)
@@ -103,8 +116,8 @@ app.put('/unlike',auth1,(req,res)=>{
     },{
         new:true
     })
-    .populate("comments.postedBy","_id name")
-    .populate("postedBy","_id name")
+    .populate("comments.postedBy","_id name pic")
+    .populate("postedBy","_id name pic")
     .exec((err,result)=>{
         if(err){
             return res.status(422).send(err)
@@ -125,7 +138,7 @@ app.put('/comment',auth1,(req,res)=>{
         new:true
     })
     .populate("comments.postedBy","_id name")
-    .populate("postedBy","_id name")
+    .populate("postedBy","_id name pic")
     .exec((err,result)=>{
         if(err){
             return res.status(422).send(err)
