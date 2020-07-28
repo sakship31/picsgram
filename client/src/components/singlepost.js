@@ -98,21 +98,22 @@ const deletePost = (postId)=>{
             history.push('/profile/my')
         })
 }
-return (
+return (<div>
+{item.postedBy && item.likes?
 <div className="home">
     <div className="card home-card">
      <div className="card-image">
        <div >
          <img style={{ padding:"7px", width:"50px",height:"50px",borderRadius:"30px",float:"left"}}
-               src={item.postedBy?item.postedBy.pic:"loading"}
-                /></div><h5 style={{paddingLeft:"3px",paddingTop:"12px",fontSize:"20px"}}>{item.postedBy?item.postedBy.name:"loading"}
+               src={item.postedBy.pic}
+                /></div><h5 style={{paddingLeft:"3px",paddingTop:"12px",fontSize:"20px"}}><Link to={item.postedBy._id !== state._id?"/profile/"+item.postedBy._id :"/profile/my"} >{item.postedBy.name}</Link>
                  
-         {item.postedBy?item.postedBy._id == state._id 
+         {item.postedBy._id == state._id 
                             && <i className="material-icons" style={{
                                 float:"right",cursor: "pointer",paddingTop:"9px",paddingRight:"5px"
                             }} 
                             onClick={()=>deletePost(item._id)}
-                            >delete</i>:"loading"}           </h5></div>
+                            >delete</i>}           </h5></div>
 
          <div className="card-image">
              <img src={item.pic}/>
@@ -125,11 +126,11 @@ return (
                             : 
                             <i className="material-icons li" style={{color:"black"}}  onClick={()=>{likePost(item._id)}}>favorite</i>)
                            :console.log('nope') }
-         <br/>{item.likes?item.likes.length:"loading"} likes<br/>
+         <br/>{item.likes.length} likes<br/>
             <h6 >{item.caption}</h6>   
 
-            <h6 style={{fontWeight:"500",color:"#81858a"}}> {item.comments?item.comments.length:"loading"} Comments</h6>   
-            { item.comments?
+            <h6 style={{fontWeight:"500",color:"#81858a"}}> {item.comments.length} Comments</h6>   
+            { 
                                     item.comments.map(record=>{
                                         return(
                                           <div>
@@ -137,7 +138,7 @@ return (
                     
                                         </div>
                                         )
-                                    }):"loading"
+                                    })
                                 }
                                 <form onSubmit={(e)=>{
                                     e.preventDefault()
@@ -153,7 +154,7 @@ return (
         
 )
 </div>
-  )}
+:<div className="brand-logo" style={{fontSize:"40px"}}>Loading...</div>}</div>)}
 
 
 

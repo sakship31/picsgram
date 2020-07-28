@@ -82,3 +82,9 @@
   margin-top: 30px !important;
   margin-left: 400px !important;
 }
+
+.heading{
+  max-width: 580px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid;
+}

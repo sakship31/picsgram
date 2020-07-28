@@ -39,7 +39,7 @@ const Routing = ()=>{
       <Route path="/single/:id">
         <Single />
       </Route>
-      <Route path="/followingposts">
+      <Route path="/home">
         <Followingposts />
       </Route>
       <Route path="/explore">

@@ -98,25 +98,10 @@ const makeComment = (text,postId)=>{
   })
 }
 
-const deletePost = (postId)=>{
-  axios.delete('http://localhost:5000/post/'+postId,
-  {
-    headers:{
-      "Content-Type":"application/json",
-      "Authorization":"Bearer "+localStorage.getItem("jwt")
-    }
-  } ).then(res=>res)
-        .then(result=>{
-            console.log(result)
-            const newData = data.filter(item=>{
-                return item._id !== result.data._id
-            })
-            setData(newData)
-        })
-}
 return (
+  <div>{data?
 <div className="home">
-<center><h5>Posts of the users you might want to follow :)</h5></center>{
+<center><h5 className="heading">Posts of the accounts you might want to follow :)</h5></center>{
 data.map(item =>{
     return(     
     <div className="card home-card">
@@ -156,7 +141,7 @@ data.map(item =>{
         
 })
  } </div>
-  )}
+ :<div className="brand-logo" style={{fontSize:"40px"}}>Loading...</div>}</div>)}
 
 
 

@@ -100,6 +100,7 @@ const Profile=()=>{
   }
 
     return (
+    <div>{userDetail.followers && userDetail.following?
         <div style={{maxWidth:"550px",margin:"0px auto"}}>
         <div style={{
            margin:"18px 0px",
@@ -119,7 +120,6 @@ const Profile=()=>{
             </div>
             <div>
     <h4>{userDetail.name}</h4>
-                {/* <h5>{userDetail.email}</h5> */}
                 <div style={{display:"flex",justifyContent:"space-between",width:"108%"}}>
                     <h6>{(data).length} posts</h6>
                     <h6>{userDetail.followers?userDetail.followers.length:"loading"} followers</h6>
@@ -169,7 +169,7 @@ const Profile=()=>{
 }
         </div>
     </div>
-    )
+    :<div className="brand-logo" style={{fontSize:"40px"}}>Loading...</div>}</div>)
 }
 
 

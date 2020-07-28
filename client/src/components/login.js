@@ -27,7 +27,7 @@ const Login=()=>{
                localStorage.setItem("user",JSON.stringify(data.data.user))
                dispatch({type:"USER",payload:data.data.user})
                M.toast({html:"Logged in successfully",classes:"#43a047 green darken-1"})
-               history.push('/followingposts')
+               history.push('/home')
            
         }).catch(err=>{
           M.toast({html: "Log in failed",classes:"#c62828 red darken-3"})

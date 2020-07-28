@@ -34,7 +34,7 @@ const Navbar=()=>{
         if(localStorage.getItem("user")){
             return [
              <li key="1"><i  data-target="modal1" className="large material-icons modal-trigger li" style={{color:"black"}}>search</i></li>,
-             <li key="5"><Link to="/followingposts" style={{color:"black"}}>Home</Link></li>,
+             <li key="5"><Link to="/home" style={{color:"black"}}>Home</Link></li>,
              <li key="2"><Link to="/explore" style={{color:"black"}}>Explore</Link></li>,
              <li key="4"><Link to="/createPost" style={{color:"black"}}>Create Post</Link></li>,
              <li key="3"><Link to="/profile/my" style={{color:"black"}}>Profile</Link></li>,           
