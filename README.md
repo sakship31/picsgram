@@ -54,6 +54,12 @@ https://picsgram31.herokuapp.com/
 
 ---------------------------------------------------------------------------------------
 
+#### To do-
+1. Email verification of users,reset password.
+2. Private accounts and hence introduce follow requests instead of directly following.
+3. Notifications.
+4. Delete user.
+
 #### Run using Command Prompt
 
 clone the repository, install react, node and all the dependenies(mentioned in package.json),and navigate to the folder-
