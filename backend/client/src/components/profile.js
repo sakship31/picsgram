@@ -14,7 +14,7 @@ const Profile=()=>{
     const {userid}=useParams()
     useEffect(()=>{
         if(userid!=='my') {
-            axios.get('http://localhost:5000/profile/'+userid,
+            axios.get('/profile/'+userid,
       
         // body:JSON.stringify(
         {
@@ -36,7 +36,7 @@ const Profile=()=>{
         })
     }
     else{
-        axios.get('http://localhost:5000/profile/'+user._id,
+        axios.get('/profile/'+user._id,
        
         // body:JSON.stringify(
         {
@@ -63,7 +63,7 @@ const Profile=()=>{
     },[userid,userDetail])
 
     const followUser = ()=>{
-        axios.put('http://localhost:5000/follow',
+        axios.put('/follow',
         // body:JSON.stringify(
           {
             followId:userid
@@ -79,7 +79,7 @@ const Profile=()=>{
         })
     }
     const unfollowUser = ()=>{
-        axios.put('http://localhost:5000/unfollow',
+        axios.put('/unfollow',
         // body:JSON.stringify(
           {
             unfollowId:userid
@@ -96,7 +96,7 @@ const Profile=()=>{
     }
 
     const followers = (uid)=>{
-      axios.put('http://localhost:5000/followers/'+uid,
+      axios.put('/followers/'+uid,
       // body:JSON.stringify(
     {
         headers: {
@@ -109,7 +109,7 @@ const Profile=()=>{
       })
   }
   const following = (uid)=>{
-    axios.put('http://localhost:5000/following/'+uid,
+    axios.put('/following/'+uid,
     // body:JSON.stringify(
   {
       headers: {

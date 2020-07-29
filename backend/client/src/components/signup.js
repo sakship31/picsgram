@@ -9,7 +9,7 @@ const Signup=()=>{
     const [email,setEmail] = useState('');
     const history = useHistory()
     const PostData = ()=>{
-        axios.post('http://localhost:5000/signup',
+        axios.post('/signup',
         // body:JSON.stringify(
           {
             name,

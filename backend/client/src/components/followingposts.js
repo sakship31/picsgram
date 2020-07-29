@@ -6,7 +6,7 @@ const Followingposts=()=>{
     const [data,setData]=useState([])
     const {state,dispatch} = useContext(UserContext)
     useEffect(()=>{
-        axios.get('http://localhost:5000/followingposts',
+        axios.get('/followingposts',
         // body:JSON.stringify(
         {
           headers: {
@@ -19,7 +19,7 @@ const Followingposts=()=>{
         })
     },[])
     const likePost = (id)=>{
-        axios.put('http://localhost:5000/like',  
+        axios.put('/like',  
             {
                 postId:id
           }, {
@@ -44,7 +44,7 @@ const Followingposts=()=>{
         })
   }
   const unlikePost = (id)=>{
-    axios.put('http://localhost:5000/unlike',  
+    axios.put('/unlike',  
         {
             postId:id
       }, {
@@ -70,7 +70,7 @@ const Followingposts=()=>{
 }
 
 const makeComment = (text,postId)=>{
-  axios.put('http://localhost:5000/comment',
+  axios.put('/comment',
     {
       postId,
       text

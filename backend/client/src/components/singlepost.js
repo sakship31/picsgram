@@ -8,7 +8,7 @@ const Single=()=>{
     const {id}=useParams()
     const history=useHistory()
     useEffect(()=>{
-        axios.get('http://localhost:5000/single/'+id,
+        axios.get('/single/'+id,
         // body:JSON.stringify(
         {
           headers: {
@@ -20,7 +20,7 @@ const Single=()=>{
         })
     },[])
     const likePost = (id)=>{
-        axios.put('http://localhost:5000/like',  
+        axios.put('/like',  
             {
                 postId:id
           }, {
@@ -37,7 +37,7 @@ const Single=()=>{
         })
   }
   const unlikePost = (id)=>{
-    axios.put('http://localhost:5000/unlike',  
+    axios.put('/unlike',  
         {
             postId:id
       }, {
@@ -55,7 +55,7 @@ const Single=()=>{
 }
 
 const makeComment = (text,postId)=>{
-  axios.put('http://localhost:5000/comment',
+  axios.put('/comment',
     {
       postId,
       text
@@ -75,7 +75,7 @@ const makeComment = (text,postId)=>{
 }
 
 const deletePost = (postId)=>{
-  axios.delete('http://localhost:5000/post/'+postId,
+  axios.delete('/post/'+postId,
   {
     headers:{
       "Content-Type":"application/json",

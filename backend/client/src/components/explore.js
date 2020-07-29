@@ -6,7 +6,7 @@ const Explore=()=>{
     const [data,setData]=useState([])
     const {state,dispatch} = useContext(UserContext)
     useEffect(()=>{
-        axios.get('http://localhost:5000/allposts',
+        axios.get('/allposts',
         // body:JSON.stringify(
         {
           headers: {
@@ -18,7 +18,7 @@ const Explore=()=>{
         })
     },[])
     const likePost = (id)=>{
-        axios.put('http://localhost:5000/like',  
+        axios.put('/like',  
             {
                 postId:id
           }, {
@@ -43,7 +43,7 @@ const Explore=()=>{
         })
   }
   const unlikePost = (id)=>{
-    axios.put('http://localhost:5000/unlike',  
+    axios.put('/unlike',  
         {
             postId:id
       }, {
@@ -69,7 +69,7 @@ const Explore=()=>{
 }
 
 const makeComment = (text,postId)=>{
-  axios.put('http://localhost:5000/comment',
+  axios.put('/comment',
     {
       postId,
       text

@@ -10,7 +10,7 @@ const UpdatePic=()=>{
     const [url,setUrl] = useState("")
     useEffect(()=>{
         if(url){
-            axios.put('http://localhost:5000/updatepic',
+            axios.put('/updatepic',
             // body:JSON.stringify(
               {
                 pic:url,
