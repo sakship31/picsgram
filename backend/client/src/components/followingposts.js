@@ -14,8 +14,7 @@ const Followingposts=()=>{
           }
         }).then(res=>res)
         .then(result=>{
-            console.log('hey')
-            console.log(result.data.posts)
+            
             setData(result.data.posts)
         })
     },[])
@@ -30,7 +29,7 @@ const Followingposts=()=>{
             }
           }).then(res=>res)
         .then(result=>{
-                   console.log(result)
+                  
           const newData = data.map(item=>{
               if(item._id==result.data._id){
                   return result.data
@@ -55,7 +54,7 @@ const Followingposts=()=>{
         }
       }).then(res=>res)
     .then(result=>{
-               console.log(result)
+            
       const newData = data.map(item=>{
           if(item._id==result.data._id){
               return result.data

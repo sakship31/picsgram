@@ -25,7 +25,7 @@ const Navbar=()=>{
    
     }).then(res=>res)
     .then(results=>{
-      console.log(results)
+    
       setUserDetails(results.data.user)
       
     })

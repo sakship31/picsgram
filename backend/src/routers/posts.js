@@ -13,18 +13,11 @@ app.post('/createpost',auth1,async (req,res)=>{
     if(!caption || !pic){
       return  res.status(422).json({error:"Please add all the fields"})
     }
-    // req.user.password = undefined
     const post = new Post({
         caption,
         pic,
         postedBy:req.user
     })
-    // post.save().then(result=>{
-    //     res.json({post:result})
-    // })
-    // .catch(err=>{
-    //     console.log(err)
-    // })
     try{
         await post.save()
         res.status(201).send(post)

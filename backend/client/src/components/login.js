@@ -20,9 +20,7 @@ const Login=()=>{
           }
         }).then(res=>res)
         .then(data=>{
-          console.log(data)   
-          console.log(data.data.token)
-          console.log(data.data.user)
+          
                localStorage.setItem("jwt",data.data.token)
                localStorage.setItem("user",JSON.stringify(data.data.user))
                dispatch({type:"USER",payload:data.data.user})

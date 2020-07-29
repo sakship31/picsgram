@@ -14,9 +14,6 @@ const Explore=()=>{
           }
         }).then(res=>res)
         .then(result=>{
-            console.log('hey')
-            console.log(result.data)
-            console.log(result.data.posts)
             setData(result.data.posts)
         })
     },[])
@@ -31,7 +28,7 @@ const Explore=()=>{
             }
           }).then(res=>res)
         .then(result=>{
-                   console.log(result)
+                  
           const newData = data.map(item=>{
               if(item._id==result.data._id){
                   return result.data
@@ -56,7 +53,7 @@ const Explore=()=>{
         }
       }).then(res=>res)
     .then(result=>{
-               console.log(result)
+              
       const newData = data.map(item=>{
           if(item._id==result.data._id){
               return result.data
@@ -84,7 +81,7 @@ const makeComment = (text,postId)=>{
   } 
   ).then(res=>res)
   .then(result=>{
-      console.log(result.data)
+     
       const newData = data.map(item=>{
         if(item._id==result.data._id){
             return result.data

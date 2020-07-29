@@ -10,7 +10,7 @@ const Followers=()=>{
     const {state,dispatch} = useContext(UserContext)
     const user=useParams()
     useEffect(()=>{
-        console.log(user.id)
+        
         if(user.id){
         axios.get('http://localhost:5000/followers/'+user.id,
       {
@@ -20,7 +20,7 @@ const Followers=()=>{
           }
         }).then(res=>res)
         .then(result=>{
-          console.log(result.data.users[0].followers)
+        
                 setData(result.data.users[0].followers)
         }).catch(err=>{
             console.log(err)

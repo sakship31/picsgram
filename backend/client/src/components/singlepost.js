@@ -16,10 +16,6 @@ const Single=()=>{
           }
         }).then(res=>res)
         .then(result=>{
-            console.log('hey1111')
-            console.log(result)
-            console.log(result.data)
-            console.log(result.data.posts)
             setItem(result.data.posts)
         })
     },[])
@@ -34,7 +30,6 @@ const Single=()=>{
             }
           }).then(res=>res)
         .then(result=>{
-                   console.log(result)
           const newData = result.data
           setItem(newData)
         }).catch(err=>{
@@ -52,7 +47,6 @@ const Single=()=>{
         }
       }).then(res=>res)
     .then(result=>{
-               console.log(result)
       const newData =result.data
       setItem(newData)
     }).catch(err=>{
@@ -73,7 +67,6 @@ const makeComment = (text,postId)=>{
   } 
   ).then(res=>res)
   .then(result=>{
-      console.log(result.data)
       const newData = result.data
     setItem(newData)
   }).catch(err=>{
@@ -90,11 +83,6 @@ const deletePost = (postId)=>{
     }
   } ).then(res=>res)
         .then(result=>{
-            console.log(result)
-            // const newData = item.filter(it=>{
-            //     return it._id !== result.data._id
-            // })
-            // setItem(newData)
             history.push('/profile/my')
         })
 }
@@ -120,12 +108,12 @@ return (<div>
          </div>
          <div className="card-content input-field">
          
-         {item.likes?(item.likes.includes(state._id)
+         {(item.likes.includes(state._id)
                             ? 
                             <i className="material-icons li" style={{color:"red"}}  onClick={()=>{unlikePost(item._id)}}>favorite</i>
                             : 
                             <i className="material-icons li" style={{color:"black"}}  onClick={()=>{likePost(item._id)}}>favorite</i>)
-                           :console.log('nope') }
+                            }
          <br/>{item.likes.length} likes<br/>
             <h6 >{item.caption}</h6>   
 
@@ -134,7 +122,8 @@ return (<div>
                                     item.comments.map(record=>{
                                         return(
                                           <div>
-                                        <h6 key={record._id}><span style={{fontWeight:"500",color:"blue"}}>{record.postedBy.name}: </span>{record.text}</h6>
+                                        <h6 key={record._id}><span style={{fontWeight:"500",color:"blue"}}>       
+                                        <Link to={record.postedBy._id !== state._id?"/profile/"+record.postedBy._id :"/profile/my"} >{record.postedBy.name}:</Link> </span>{record.text}</h6>
                     
                                         </div>
                                         )

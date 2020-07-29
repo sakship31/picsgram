@@ -74,7 +74,7 @@ const Profile=()=>{
           }
         }).then(res=>res)
         .then(data=>{
-                console.log(data)
+                // console.log(data)
                 userDetail.followers.length+=1
         })
     }
