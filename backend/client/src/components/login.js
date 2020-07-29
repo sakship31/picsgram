@@ -9,7 +9,7 @@ const Login=()=>{
     const [email,setEmail] = useState('');
     const history = useHistory()
     const PostData = ()=>{
-        axios.post('http://localhost:5000/login',
+        axios.post('/login',
         // body:JSON.stringify(
           {
             password,

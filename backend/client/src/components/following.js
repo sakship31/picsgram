@@ -11,7 +11,7 @@ const Following=()=>{
     const user=useParams()
     useEffect(()=>{
         if(user.id){
-        axios.get('http://localhost:5000/following/'+user.id,
+        axios.get('/following/'+user.id,
       {
           headers: {
             "Content-Type": "application/json",
@@ -29,7 +29,7 @@ const Following=()=>{
     }},[user])
 
     const followUser = (uid)=>{
-      axios.put('http://localhost:5000/follow',
+      axios.put('/follow',
       // body:JSON.stringify(
         {
           followId:uid

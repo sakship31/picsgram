@@ -10,7 +10,7 @@ const CreatePost=()=>{
     const [url,setUrl] = useState("")
     useEffect(()=>{
         if(url){
-            axios.post('http://localhost:5000/createpost',
+            axios.post('/createpost',
             // body:JSON.stringify(
               {
                 caption,

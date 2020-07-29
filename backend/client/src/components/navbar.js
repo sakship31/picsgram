@@ -15,7 +15,7 @@ const Navbar=()=>{
   
   const fetchUsers = (query)=>{
     setSearch(query)
-    Axios.post('http://localhost:5000/search',
+    Axios.post('/search',
     {
       query
     },{   
