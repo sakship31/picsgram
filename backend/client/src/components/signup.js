@@ -9,7 +9,6 @@ const Signup=()=>{
     const [email,setEmail] = useState('');
     const history = useHistory()
     const PostData = ()=>{
-        console.log(name)
         axios.post('http://localhost:5000/signup',
         // body:JSON.stringify(
           {
@@ -22,7 +21,6 @@ const Signup=()=>{
           }
         }).then(res=>res)
         .then(data=>{
-          console.log(data)
                M.toast({html:"Authentication successfull",classes:"#43a047 green darken-1"})
                history.push('/login')
            

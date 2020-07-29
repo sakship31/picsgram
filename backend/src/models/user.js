@@ -5,7 +5,6 @@ const jwt=require('jsonwebtoken')
 const {ObjectId} = mongoose.Schema.Types
 const {SECRET_KEY}= require('../../../config/keys')
 const Post =require('./post')
-const Mail = require('../helper/Mail');
 // const moment = require('moment-timezone');
 // const dateIndia = moment.tz(Date.now(), "Asia/Calcutta");
 
@@ -91,22 +90,6 @@ userSchema.pre('remove',async function(next){
     await Post.deleteMany({postedBy:user._id})
     next()
 })
-
-userSchema.post('save',async function(next){
-console.log('entered post')
-    const user = this 
-        let content = 
-        `
-            <b>Welcome ${user.email} </b><br>
-            Activate your account by using the following code <strong> <br />
-        `
-        
-        var sendMailResult = await Mail.sendMail(user.email , "Mail verification" ,content )//to ,subject ,html
-        // console.log('sendMailResult :'+JSON.stringify(sendMailResult))
-        if(sendMailResult.error){
-            //handle mail errors here
-        }
-    })
 
 var User=mongoose.model('User',userSchema)
 
